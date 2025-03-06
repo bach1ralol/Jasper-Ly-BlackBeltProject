@@ -27,10 +27,17 @@ public class Spawner : MonoBehaviour
     {
         GameObject platformToSpawn = platformPrefabs[Random.Range(0, platformPrefabs.Length)];
 
-        GameObject spawnedPlatform = Instantiate(platformToSpawn, transform.position, Quaternion.identity);
+        GameObject spawnedPlatform = Instantiate(platformToSpawn, new Vector3(12, Random.Range(-3, 2.5f), 0), Quaternion.identity);
 
         Rigidbody2D platformRB = spawnedPlatform.GetComponent<Rigidbody2D>();
 
+        platformRB.linearVelocity = new Vector2(-10, 0);
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
     }
 
 }
