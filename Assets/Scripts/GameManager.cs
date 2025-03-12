@@ -36,4 +36,6 @@ public class GameManager : MonoBehaviour
     {
         return Mathf.RoundToInt(currentScore).ToString();
     }
+
+
 }
