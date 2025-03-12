@@ -34,10 +34,4 @@ public class Spawner : MonoBehaviour
         platformRB.linearVelocity = new Vector2(-10, 0);
 
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-    }
-
 }
