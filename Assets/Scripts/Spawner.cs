@@ -31,7 +31,7 @@ public class Spawner : MonoBehaviour
 
         Rigidbody2D platformRB = spawnedPlatform.GetComponent<Rigidbody2D>();
 
-        platformRB.linearVelocity = new Vector2(-10, 0);
+        platformRB.linearVelocity = new Vector2(-10, 1);
 
     }
 }

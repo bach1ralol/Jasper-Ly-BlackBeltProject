@@ -755,6 +755,7 @@ MonoBehaviour:
   platformPrefabs:
   - {fileID: 7103749368480859847, guid: effd4359566ff9345bb2c6adca84c3f4, type: 3}
   - {fileID: 6386410818498608983, guid: d7f32a6ceddf31a40bfc51951a1e7eff, type: 3}
+  - {fileID: 365619363423637896, guid: 9102db48f6d23b144a91fd3485d761ad, type: 3}
   platformSpawnTime: 1.2
 --- !u!4 &1865604530
 Transform:
