@@ -113,7 +113,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: GrassyPlatform
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8690024589750997982, guid: effd4359566ff9345bb2c6adca84c3f4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -133,11 +134,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1903129194153474783, guid: 1b0b5d165b499e641bf7e6ca869c9e2d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.4
+      value: -0.54
       objectReference: {fileID: 0}
     - target: {fileID: 1903129194153474783, guid: 1b0b5d165b499e641bf7e6ca869c9e2d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.92
+      value: 2.06
       objectReference: {fileID: 0}
     - target: {fileID: 1903129194153474783, guid: 1b0b5d165b499e641bf7e6ca869c9e2d, type: 3}
       propertyPath: m_LocalPosition.z
