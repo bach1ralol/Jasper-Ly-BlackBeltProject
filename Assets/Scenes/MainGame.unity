@@ -772,7 +772,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 37, y: -47.8}
+  m_AnchoredPosition: {x: 37, y: -47.80005}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1420405120
@@ -1042,7 +1042,7 @@ MonoBehaviour:
   - {fileID: 7103749368480859847, guid: effd4359566ff9345bb2c6adca84c3f4, type: 3}
   - {fileID: 6386410818498608983, guid: d7f32a6ceddf31a40bfc51951a1e7eff, type: 3}
   - {fileID: 365619363423637896, guid: 9102db48f6d23b144a91fd3485d761ad, type: 3}
-  platformSpawnTime: 1.1
+  platformSpawnTime: 1
 --- !u!4 &1865604530
 Transform:
   m_ObjectHideFlags: 0
@@ -1251,12 +1251,12 @@ Rigidbody2D:
   m_GameObject: {fileID: 2043504543}
   m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 3.25
+  m_GravityScale: 3.5
   m_Material: {fileID: 6200000, guid: a4b83ee029c0608488c6850f8d975677, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1264,9 +1264,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 5
 --- !u!114 &2043504547
 MonoBehaviour:
@@ -1282,13 +1282,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 2043504546}
   GFX: {fileID: 1075086036}
-  jumpForce: 8
+  jumpForce: 15
+  CrouchForce: 3
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   feetPos: {fileID: 1230036209}
   groundDistance: 0.25
-  jumpTime: 0.5
+  jumpTime: 0.2
   crouchHeight: 0.5
 --- !u!58 &2043504548
 CircleCollider2D:
