@@ -11,34 +11,38 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundDistance = 0.25f;
     [SerializeField] private float jumpTime = 0.3f;
     [SerializeField] private float crouchHeight = 0.5f;
-
     private bool isGrounded = false;
     private bool isJumping = false;
-    private bool canDoubleJump = false; // Variable to track if double jump is available
+    public bool isGameStart=false;
+    [SerializeField] private bool canDoubleJump = false; // Variable to track if double jump is available
 
     private void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(feetPos.position, groundDistance, groundLayer);
 
+        if (isGameStart)
+        {
+            rb.linearVelocity = new Vector2( 10, rb.linearVelocityY);
+        }
+
+        isGrounded = Physics2D.OverlapCircle(feetPos.position, groundDistance, groundLayer);
+        Debug.DrawRay(feetPos.position, -Vector2.up*0.1f, Color.red);
         #region Jump
 
         if (isGrounded)
         {
-            // Reset double jump when grounded
             canDoubleJump = true;
 
             if (Input.GetButtonDown("Jump"))
             {
-                rb.AddForce(rb.transform.up * jumpForce, ForceMode2D.Impulse);
-                isJumping = true;
-                canDoubleJump = false; // Disable double jump once primary jump is used
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             }
         }
         else if (canDoubleJump && Input.GetButtonDown("Jump"))
         {
-            // Perform double jump
-            rb.AddForce(rb.transform.up * jumpForce, ForceMode2D.Impulse);
-            canDoubleJump = false; // Disable further jumps until grounded
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+            rb.AddForce(Vector2.up * jumpForce * 0.8f, ForceMode2D.Impulse);
+            canDoubleJump = false;
         }
 
         #endregion
@@ -61,10 +65,19 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        /*
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
+        if (hit)
+        {
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0); // Stop vertical velocity on collision
+        }*/
+
+        /*
         if (collision.gameObject.CompareTag("Ground"))
         {
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0); // Stop vertical velocity on collision
-        }
+        }*/
     }
 }
