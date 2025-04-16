@@ -16,9 +16,23 @@ public class PlayerMovement : MonoBehaviour
     public bool isGameStart=false;
     [SerializeField] private bool canDoubleJump = false; // Variable to track if double jump is available
 
+    public Transform platformCheckPoint;
+    public float sideDistance;
     private void Update()
     {
-
+        RaycastHit2D sideHit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, sideDistance, groundLayer);
+        if (sideHit)
+        {
+            Debug.Log("Hit");
+            Vector2 topOrigin = new Vector2(sideHit.point.x, sideHit.point.y + 0.8f);
+            Debug.DrawRay(topOrigin, Vector2.down * 1f, Color.green, 1f);  // visualize it
+            RaycastHit2D downHit = Physics2D.Raycast(topOrigin, Vector2.down, 1f, groundLayer);
+            if (downHit)
+            {
+                Debug.Log("Move player up");
+                transform.position = new Vector3(transform.position.x, downHit.point.y+0.5f, transform.position.z);
+            }
+        }
         if (isGameStart)
         {
             rb.linearVelocity = new Vector2( 10, rb.linearVelocityY);
@@ -61,23 +75,5 @@ public class PlayerMovement : MonoBehaviour
         }
 
         #endregion
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        /*
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
-        if (hit)
-        {
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0); // Stop vertical velocity on collision
-        }*/
-
-        /*
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0); // Stop vertical velocity on collision
-        }*/
     }
 }

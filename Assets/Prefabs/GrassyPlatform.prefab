@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8228543571327392631}
   - component: {fileID: 8690024589750997982}
   - component: {fileID: -2042029951722075295}
-  - component: {fileID: 2453536983858949985}
+  - component: {fileID: 3284084573650610169}
   m_Layer: 6
   m_Name: GrassyPlatform
   m_TagString: Ground
@@ -136,8 +136,8 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
---- !u!68 &2453536983858949985
-EdgeCollider2D:
+--- !u!61 &3284084573650610169
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -170,12 +170,15 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.11312103, y: 6.3348403}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 46.079998, y: 46.079998}
+    newSize: {x: 46.079998, y: 46.079998}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 33.636566, y: 2.641118}
   m_EdgeRadius: 0
-  m_Points:
-  - {x: -16.844347, y: 7.289004}
-  - {x: 16.388788, y: 7.471227}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
