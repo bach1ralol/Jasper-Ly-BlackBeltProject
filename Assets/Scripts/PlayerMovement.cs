@@ -11,13 +11,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundDistance = 0.25f;
     [SerializeField] private float jumpTime = 0.3f;
     [SerializeField] private float crouchHeight = 0.5f;
+    [SerializeField] private bool isAttacking = false;
     private bool isGrounded = false;
     private bool isJumping = false;
+    public float rotationSpeed = 100f;
     public bool isGameStart=false;
     [SerializeField] private bool canDoubleJump = false; // Variable to track if double jump is available
 
     public Transform platformCheckPoint;
     public float sideDistance;
+
+    public PhysicsMaterial2D normalM;
+    public PhysicsMaterial2D attackM;
     private void Update()
     {
         RaycastHit2D sideHit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, sideDistance, groundLayer);
@@ -44,8 +49,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded)
         {
+            GetComponent<Collider2D>().sharedMaterial = normalM;
             canDoubleJump = true;
-
+            isAttacking = false;
             if (Input.GetButtonDown("Jump"))
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
@@ -72,6 +78,25 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonUp("Crouch"))
         {
             GFX.localScale = new Vector3(GFX.localScale.x, 1f, GFX.localScale.z);
+        }
+
+        #endregion
+
+        #region AttackingSpin
+
+        if (Input.GetKeyDown(KeyCode.F) && isAttacking == false)
+        {
+            isAttacking = true;
+        }
+
+        if (isAttacking == true)
+        {
+            GetComponent<Collider2D>().sharedMaterial = attackM;
+            transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
+        }
+        else
+        {
+            transform.rotation = Quaternion.identity;
         }
 
         #endregion
