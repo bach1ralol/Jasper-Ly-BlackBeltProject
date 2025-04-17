@@ -1581,7 +1581,7 @@ MonoBehaviour:
   rb: {fileID: 2043504546}
   GFX: {fileID: 1075086036}
   jumpForce: 15
-  CrouchForce: 3
+  CrouchForce: 2.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
