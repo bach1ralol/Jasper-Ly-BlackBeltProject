@@ -5,48 +5,77 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform GFX;
     [SerializeField] private float jumpForce = 10f;
-    [SerializeField] private float CrouchForce = 10f;
+    [SerializeField] private float crouchForce = 10f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform feetPos;
     [SerializeField] private float groundDistance = 0.25f;
-    [SerializeField] private float jumpTime = 0.3f;
     [SerializeField] private float crouchHeight = 0.5f;
     [SerializeField] private bool isAttacking = false;
-    private bool isGrounded = false;
-    private bool isJumping = false;
     public float rotationSpeed = 100f;
-    public bool isGameStart=false;
-    [SerializeField] private bool canDoubleJump = false; // Variable to track if double jump is available
+    public bool isGameStart = false;
+    [SerializeField] private bool canDoubleJump = false;
 
     public Transform platformCheckPoint;
     public float sideDistance;
 
     public PhysicsMaterial2D normalM;
     public PhysicsMaterial2D attackM;
-    private void Update()
+
+    [SerializeField] private float stepHeight = 0.5f;
+    [SerializeField] private float skinWidth = 0.02f;
+
+    private bool isGrounded = false;
+    private bool wasGrounded = false;
+
+    void FixedUpdate()
     {
+        // Step-up logic
+        float direction = Mathf.Sign(rb.linearVelocity.x);
+        Vector2 size = GetComponent<Collider2D>().bounds.size;
+        Vector2 originLow = (Vector2)transform.position + Vector2.up * skinWidth;
+        Vector2 originHigh = originLow + Vector2.up * stepHeight;
+
+        RaycastHit2D hitLow = Physics2D.BoxCast(originLow, size, 0f, Vector2.right * direction, Mathf.Abs(rb.linearVelocity.x * Time.fixedDeltaTime), groundLayer);
+        RaycastHit2D hitHigh = Physics2D.BoxCast(originHigh, size, 0f, Vector2.right * direction, Mathf.Abs(rb.linearVelocity.x * Time.fixedDeltaTime), groundLayer);
+
+        if (hitLow && !hitHigh)
+        {
+            transform.Translate(Vector2.up * stepHeight, Space.World);
+        }
+
+        // Landing check: zero vertical velocity on impact
+        bool nowGrounded = Physics2D.OverlapCircle(feetPos.position, groundDistance, groundLayer);
+        if (nowGrounded && !wasGrounded)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+        }
+        wasGrounded = nowGrounded;
+    }
+
+    void Update()
+    {
+        // Side-edge correction
         RaycastHit2D sideHit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, sideDistance, groundLayer);
         if (sideHit)
         {
-            Debug.Log("Hit");
-            Vector2 topOrigin = new Vector2(sideHit.point.x, sideHit.point.y + 0.8f);
-            Debug.DrawRay(topOrigin, Vector2.down * 1f, Color.green, 1f);  // visualize it
+            Vector2 topOrigin = sideHit.point + Vector2.up * 0.8f;
             RaycastHit2D downHit = Physics2D.Raycast(topOrigin, Vector2.down, 1f, groundLayer);
             if (downHit)
             {
-                Debug.Log("Move player up");
-                transform.position = new Vector3(transform.position.x, downHit.point.y+0.5f, transform.position.z);
+                transform.position = new Vector3(transform.position.x, downHit.point.y + 0.5f, transform.position.z);
             }
         }
+
+        // Constant forward motion
         if (isGameStart)
         {
-            rb.linearVelocity = new Vector2( 10, rb.linearVelocityY);
+            rb.linearVelocity = new Vector2(10f, rb.linearVelocity.y);
         }
 
+        // Ground check
         isGrounded = Physics2D.OverlapCircle(feetPos.position, groundDistance, groundLayer);
-        Debug.DrawRay(feetPos.position, -Vector2.up*0.1f, Color.red);
-        #region Jump
 
+        #region Jump
         if (isGrounded)
         {
             GetComponent<Collider2D>().sharedMaterial = normalM;
@@ -64,41 +93,33 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(Vector2.up * jumpForce * 0.8f, ForceMode2D.Impulse);
             canDoubleJump = false;
         }
-
         #endregion
 
         #region Crouch
-
-        if (Input.GetButton("Crouch"))
+        if (Input.GetButton("Crouch") && !isGrounded)
         {
-            GFX.localScale = new Vector3(GFX.localScale.x, crouchHeight, GFX.localScale.z);
-            rb.AddForce(-rb.transform.up * CrouchForce, ForceMode2D.Impulse);
+            rb.AddForce(-Vector2.up * crouchForce, ForceMode2D.Impulse);
         }
-
         if (Input.GetButtonUp("Crouch"))
         {
             GFX.localScale = new Vector3(GFX.localScale.x, 1f, GFX.localScale.z);
         }
-
         #endregion
 
         #region AttackingSpin
-
-        if (Input.GetKeyDown(KeyCode.F) && isAttacking == false)
+        if (Input.GetKeyDown(KeyCode.F) && !isAttacking)
         {
             isAttacking = true;
         }
-
-        if (isAttacking == true)
+        if (isAttacking)
         {
             GetComponent<Collider2D>().sharedMaterial = attackM;
-            transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
+            transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime);
         }
         else
         {
             transform.rotation = Quaternion.identity;
         }
-
         #endregion
     }
 }

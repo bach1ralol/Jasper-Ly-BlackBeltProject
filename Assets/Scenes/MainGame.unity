@@ -686,8 +686,8 @@ Transform:
   m_GameObject: {fileID: 477008908}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.04, y: -7.57, z: 10.604301}
-  m_LocalScale: {x: 25, y: 1, z: 1}
+  m_LocalPosition: {x: -0.0144, y: -7.6789, z: 10.604301}
+  m_LocalScale: {x: 24.890121, y: 0.78220755, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 330585546}
@@ -1300,7 +1300,8 @@ MonoBehaviour:
   - {fileID: 7103749368480859847, guid: effd4359566ff9345bb2c6adca84c3f4, type: 3}
   - {fileID: 6386410818498608983, guid: d7f32a6ceddf31a40bfc51951a1e7eff, type: 3}
   - {fileID: 365619363423637896, guid: 9102db48f6d23b144a91fd3485d761ad, type: 3}
-  platformSpawnTime: 1.25
+  - {fileID: 7103749368480859847, guid: 15028de362e04c141b280d7106bf9990, type: 3}
+  platformSpawnTime: 1.35
   SpawnPoints:
   - {fileID: 795280764}
   - {fileID: 293306654}
@@ -1581,18 +1582,23 @@ MonoBehaviour:
   rb: {fileID: 2043504546}
   GFX: {fileID: 1075086036}
   jumpForce: 15
-  CrouchForce: 2.5
+  crouchForce: 10
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   feetPos: {fileID: 1230036209}
   groundDistance: 0.25
-  jumpTime: 0.2
   crouchHeight: 0.5
+  isAttacking: 0
+  rotationSpeed: 5000
   isGameStart: 0
   canDoubleJump: 0
   platformCheckPoint: {fileID: 1881869396}
   sideDistance: 2
+  normalM: {fileID: 6200000, guid: a4b83ee029c0608488c6850f8d975677, type: 2}
+  attackM: {fileID: 6200000, guid: 9b915bf8cb2a0ed4eab4e770ea13904f, type: 2}
+  stepHeight: 0.5
+  skinWidth: 0.02
 --- !u!58 &2043504548
 CircleCollider2D:
   m_ObjectHideFlags: 0
