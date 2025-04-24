@@ -8,8 +8,15 @@ public class SamuraiDeath : MonoBehaviour
         Debug.Log(collision.gameObject);
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("You Lose");
-            SceneManager.LoadScene("GameOver");
+            if (collision.gameObject.GetComponent<PlayerMovement>().isAttacking)
+            {
+                collision.gameObject.GetComponent<PlayerMovement>().isAttacking = false;
+                Destroy(gameObject);
+            }
+            else {
+                Debug.Log("You Lose");
+                SceneManager.LoadScene("GameOver");
+            }
         }
     }
 }
