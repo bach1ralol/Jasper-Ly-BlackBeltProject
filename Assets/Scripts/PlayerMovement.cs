@@ -104,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region Crouch
-        if (Input.GetButton("Crouch") && !isGrounded)
+        if (Input.GetButton("Crouch") && !isGrounded && isAttacking == false)
         {
             rb.AddForce(-Vector2.up * crouchForce, ForceMode2D.Impulse);
             GFX.localScale = new Vector3(GFX.localScale.x, crouchHeight, GFX.localScale.z);
