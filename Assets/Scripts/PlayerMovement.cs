@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundDistance = 0.25f;
     [SerializeField] private float crouchHeight = 0.5f;
 
+    [SerializeField] private GameObject playerImage;
+
     public float rotationSpeed = 100f;
     public bool isGameStart = false;
     [SerializeField] private bool canDoubleJump = false;
@@ -52,11 +54,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Landing check: only zero vertical velocity if on normal material
         bool nowGrounded = Physics2D.OverlapCircle(feetPos.position, groundDistance, groundLayer);
-        if (nowGrounded && !wasGrounded)
-        {
-            if (_col.sharedMaterial == normalM)
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
-        }
         wasGrounded = nowGrounded;
     }
 
@@ -123,11 +120,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (isAttacking)
         {
-            transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime);
+            playerImage.transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime);
         }
         else
         {
-            transform.rotation = Quaternion.identity;
+            playerImage.transform.rotation = Quaternion.identity;
         }
         #endregion
     }

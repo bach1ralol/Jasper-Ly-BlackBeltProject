@@ -1603,6 +1603,7 @@ MonoBehaviour:
   feetPos: {fileID: 1230036209}
   groundDistance: 0.25
   crouchHeight: 0.5
+  playerImage: {fileID: 1539798786}
   rotationSpeed: 5000
   isGameStart: 0
   canDoubleJump: 0
