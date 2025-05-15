@@ -90,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                FindFirstObjectByType<AudioManager>().Play("Jump");
             }
         }
         else if (canDoubleJump && Input.GetButtonDown("Jump"))
@@ -97,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
             rb.AddForce(Vector2.up * jumpForce * 0.8f, ForceMode2D.Impulse);
             canDoubleJump = false;
+            FindFirstObjectByType<AudioManager>().Play("Jump");
         }
         #endregion
 
