@@ -11,6 +11,7 @@ public class ObstacleDeath : MonoBehaviour
             if (!collision.gameObject.GetComponent<PlayerMovement>().isAttacking){
                 Debug.Log("You Lose");
                 SceneManager.LoadScene("GameOver");
+                FindFirstObjectByType<AudioManager>().Play("SpikeDeath");
             }
         }
     }

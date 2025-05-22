@@ -1019,6 +1019,11 @@ MonoBehaviour:
     volume: 5
     pitch: 1
     source: {fileID: 0}
+  - name: SpikeDeath
+    clip: {fileID: 8300000, guid: 5c96b8285dbdf8d4d9f18493e0c19229, type: 3}
+    volume: 5
+    pitch: 1
+    source: {fileID: 0}
 --- !u!1 &1420405118
 GameObject:
   m_ObjectHideFlags: 0
