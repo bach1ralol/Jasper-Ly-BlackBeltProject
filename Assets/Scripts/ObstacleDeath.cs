@@ -12,6 +12,8 @@ public class ObstacleDeath : MonoBehaviour
                 Debug.Log("You Lose");
                 SceneManager.LoadScene("GameOver");
                 FindFirstObjectByType<AudioManager>().Play("SpikeDeath");
+                FindFirstObjectByType<AudioManager>().Stop("ThemeSong");
+
             }
         }
     }

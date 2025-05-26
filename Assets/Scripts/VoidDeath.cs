@@ -6,6 +6,7 @@ public class VoidDeath : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            FindFirstObjectByType<AudioManager>().Stop("ThemeSong");
             SceneManager.LoadScene("GameOver");
         }
     }

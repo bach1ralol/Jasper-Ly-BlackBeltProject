@@ -16,6 +16,7 @@ public class SamuraiDeath : MonoBehaviour
             else {
                 Debug.Log("You Lose");
                 SceneManager.LoadScene("GameOver");
+                FindFirstObjectByType<AudioManager>().Play("SamuraiSlash");
             }
         }
     }
