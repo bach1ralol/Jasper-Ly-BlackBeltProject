@@ -1029,6 +1029,11 @@ MonoBehaviour:
     volume: 5
     pitch: 1
     source: {fileID: 0}
+  - name: FallingInTheVoid
+    clip: {fileID: 8300000, guid: 778bfa3bc8741a041b3093c8740695f0, type: 3}
+    volume: 5
+    pitch: 1
+    source: {fileID: 0}
 --- !u!1 &1420405118
 GameObject:
   m_ObjectHideFlags: 0

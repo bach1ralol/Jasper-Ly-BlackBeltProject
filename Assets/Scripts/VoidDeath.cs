@@ -7,6 +7,7 @@ public class VoidDeath : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             FindFirstObjectByType<AudioManager>().Stop("ThemeSong");
+            FindFirstObjectByType<AudioManager>().Play("FallingInTheVoid");
             SceneManager.LoadScene("GameOver");
         }
     }
