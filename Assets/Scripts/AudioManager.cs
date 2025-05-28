@@ -35,7 +35,7 @@ public class AudioManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void Play (string name)
+    public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         s.source.Play();
@@ -52,8 +52,5 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound not found: " + name);
         }
     }
-    private void Start()
-    {
-        Play("ThemeSong");
-    }
 }
+

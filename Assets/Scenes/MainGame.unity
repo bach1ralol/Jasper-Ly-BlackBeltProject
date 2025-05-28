@@ -964,76 +964,6 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
---- !u!1 &1263505151
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1263505152}
-  - component: {fileID: 1263505153}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1263505152
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263505151}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.7021291, y: 1.8950768, z: -0.15482245}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1263505153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263505151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf3d4a9c1cea6964b818794e18130c7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sounds:
-  - name: ThemeSong
-    clip: {fileID: 8300000, guid: 94c8a00406943b14187e76d58fd17759, type: 3}
-    volume: 0.5
-    pitch: 1
-    source: {fileID: 0}
-  - name: Jump
-    clip: {fileID: 8300000, guid: aba142da5ebd14a49967e078b03cac3a, type: 3}
-    volume: 5
-    pitch: 1
-    source: {fileID: 0}
-  - name: SpikeDeath
-    clip: {fileID: 8300000, guid: 5c96b8285dbdf8d4d9f18493e0c19229, type: 3}
-    volume: 5
-    pitch: 1
-    source: {fileID: 0}
-  - name: SamuraiSlash
-    clip: {fileID: 8300000, guid: ef58b15d2e8c4934089756b997235daa, type: 3}
-    volume: 5
-    pitch: 1
-    source: {fileID: 0}
-  - name: FallingInTheVoid
-    clip: {fileID: 8300000, guid: 778bfa3bc8741a041b3093c8740695f0, type: 3}
-    volume: 5
-    pitch: 1
-    source: {fileID: 0}
 --- !u!1 &1420405118
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,6 +1199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1621789351}
   - component: {fileID: 1621789350}
+  - component: {fileID: 1621789352}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1305,6 +1236,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1621789352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621789349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2688979fca9c0344890a0f91ffccd797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1865604528
 GameObject:
   m_ObjectHideFlags: 0
@@ -1798,5 +1741,4 @@ SceneRoots:
   - {fileID: 1865604530}
   - {fileID: 24537840}
   - {fileID: 1621789351}
-  - {fileID: 1263505152}
   - {fileID: 330585546}
