@@ -31,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
     public bool isAttacking = false;
     private Collider2D _col;
 
+    public GameObject arrow;
+
     void Awake()
     {
         _col = GetComponent<Collider2D>();
@@ -129,5 +131,6 @@ public class PlayerMovement : MonoBehaviour
             playerImage.transform.rotation = Quaternion.identity;
         }
         #endregion
+
     }
 }
