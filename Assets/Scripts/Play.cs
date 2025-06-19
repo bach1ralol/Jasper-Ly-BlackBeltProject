@@ -24,12 +24,19 @@ public class PlayAgain : MonoBehaviour
         FindFirstObjectByType<AudioManager>().Play("CreditsMusic");
     }
 
+    public void Back()
+    {
+        SceneManager.LoadScene("MainMenu");
+        FindFirstObjectByType<AudioManager>().Stop("CreditsMusic");
+    }
+
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
             SceneManager.LoadScene("MainMenu");
             FindFirstObjectByType<AudioManager>().Stop("ThemeSong");
+            FindFirstObjectByType<AudioManager>().Stop("CreditsMusic");
         }
     }
 
