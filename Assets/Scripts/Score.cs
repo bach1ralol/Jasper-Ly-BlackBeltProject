@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Runtime.InteropServices;
 public class Score : MonoBehaviour
 {
 
@@ -10,6 +11,10 @@ public class Score : MonoBehaviour
     public DestroyStart destroyStart;
     public TMP_Text text;
 
+    private int highScore = 0;
+    public Text highScoreText;
+    private bool beatHighScore;
+
     private void Update()
     {
         if (timerIsRunning && destroyStart == null)
@@ -18,6 +23,12 @@ public class Score : MonoBehaviour
             score =  (int)timeElapsed;
             text.text = ((int)timeElapsed).ToString();
         }
+    }
+
+    private void Start()
+    {
+        highScore = PlayerPrefs.GetInt("HighScore");
+        highScoreText.text = "High Score: " + highScore.ToString();
     }
 }
 

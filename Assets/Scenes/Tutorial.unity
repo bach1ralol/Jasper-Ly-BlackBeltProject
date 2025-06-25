@@ -640,15 +640,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Space - Jump
+  m_text: 'Space - Jump (You can double jump.)
 
 
-    Shift - Crouch (This makes you fall faster whilst in
-    the air.)
+    Shift - Crouch (This makes you
+    fall faster whilst in the air.)
 
 
-    F - Attack (Whilst attacking you spin rapidly and can''t use
-    crouch.)
+    F - Attack (Whilst attacking you spin rapidly
+    and can''t use crouch.)
 
 
     M - Menu '
