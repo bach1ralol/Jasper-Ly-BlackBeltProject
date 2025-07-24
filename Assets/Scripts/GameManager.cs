@@ -1,5 +1,3 @@
-using System.Security.Cryptography;
-using UnityEditor.Build.Content;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour

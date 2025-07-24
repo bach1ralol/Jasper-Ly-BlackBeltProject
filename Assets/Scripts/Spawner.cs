@@ -9,6 +9,7 @@ public class Spawner : MonoBehaviour
     private float timeUntilPlatformSpawn;
 
     public Transform[] SpawnPoints;
+    public PlayerMovement playerMovement;
 
     private void Update()
     {
@@ -20,7 +21,7 @@ public class Spawner : MonoBehaviour
     {
         timeUntilPlatformSpawn += Time.deltaTime;
 
-        if (timeUntilPlatformSpawn >= platformSpawnTime)
+        if (timeUntilPlatformSpawn >= platformSpawnTime && playerMovement.isGameStart == true)
         {
             Spawn();
             timeUntilPlatformSpawn = 0f;
@@ -34,10 +35,12 @@ public class Spawner : MonoBehaviour
         Vector3 SpawnLocation = SpawnPoints[randInt].position;
         GameObject spawnedPlatform = Instantiate(platformToSpawn,SpawnLocation, Quaternion.identity);
             
-        Rigidbody2D platformRB = spawnedPlatform.GetComponent<Rigidbody2D>();
+        //Rigidbody2D platformRB = spawnedPlatform.GetComponent<Rigidbody2D>();
 
-        platformRB.linearVelocity = new Vector2(-10, 1);
+        //platformRB.linearVelocity = new Vector2(-10, 1);
 
         Destroy(spawnedPlatform, 10);
     }
+
+
 }

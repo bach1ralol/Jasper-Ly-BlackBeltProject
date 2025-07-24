@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform feetPos;
     [SerializeField] private float groundDistance = 0.25f;
     [SerializeField] private float crouchHeight = 0.5f;
-
+    [SerializeField] private float speed = 1;
     [SerializeField] private GameObject playerImage;
 
     public float rotationSpeed = 100f;
@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject arrow;
 
+
+    public Spawner spawner;
     void Awake()
     {
         _col = GetComponent<Collider2D>();
@@ -75,7 +77,9 @@ public class PlayerMovement : MonoBehaviour
 
         // Constant forward motion
         if (isGameStart)
-            rb.linearVelocity = new Vector2(10f, rb.linearVelocity.y);
+        {
+            rb.linearVelocity = new Vector2(speed, rb.linearVelocity.y);
+        }
 
         // Ground check
         isGrounded = Physics2D.OverlapCircle(feetPos.position, groundDistance, groundLayer);
