@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float rotationSpeed = 100f;
     public bool isGameStart = false;
-    [SerializeField] private bool canDoubleJump = false;
+    private bool canDoubleJump = false;
 
     public Transform platformCheckPoint;
     public float sideDistance;
@@ -27,14 +27,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float skinWidth = 0.02f;
 
     private bool isGrounded = false;
-    private bool wasGrounded = false;
-    public bool isAttacking = false;
     private Collider2D _col;
+    public bool isAttacking = false;
 
     public GameObject arrow;
-
-
     public Spawner spawner;
+
     void Awake()
     {
         _col = GetComponent<Collider2D>();
@@ -42,6 +40,9 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Ground check
+        isGrounded = Physics2D.OverlapCircle(feetPos.position, groundDistance, groundLayer);
+
         // Step-up logic
         float direction = Mathf.Sign(rb.linearVelocity.x);
         Vector2 size = _col.bounds.size;
@@ -55,14 +56,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (hitLow && !hitHigh)
             transform.Translate(Vector2.up * stepHeight, Space.World);
-
-        // Landing check: only zero vertical velocity if on normal material
-        bool nowGrounded = Physics2D.OverlapCircle(feetPos.position, groundDistance, groundLayer);
-        wasGrounded = nowGrounded;
     }
 
     void Update()
     {
+        // Constant forward motion
+        if (isGameStart)
+        {
+            rb.linearVelocity = new Vector2(speed, rb.linearVelocity.y);
+        }
+
         // Side-edge correction
         RaycastHit2D sideHit = Physics2D.Raycast(transform.position,
             Vector2.right * transform.localScale.x, sideDistance, groundLayer);
@@ -75,51 +78,39 @@ public class PlayerMovement : MonoBehaviour
                     downHit.point.y + 0.5f, transform.position.z);
         }
 
-        // Constant forward motion
-        if (isGameStart)
-        {
-            rb.linearVelocity = new Vector2(speed, rb.linearVelocity.y);
-        }
-
-        // Ground check
-        isGrounded = Physics2D.OverlapCircle(feetPos.position, groundDistance, groundLayer);
-
-        #region Jump
+        // Jump Logic
         if (isGrounded)
         {
-            // Reset attack state and material on landing
+            canDoubleJump = true;
             isAttacking = false;
             _col.sharedMaterial = normalM;
-            canDoubleJump = true;
 
             if (Input.GetButtonDown("Jump"))
             {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
                 FindFirstObjectByType<AudioManager>().Play("Jump");
             }
         }
         else if (canDoubleJump && Input.GetButtonDown("Jump"))
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
-            rb.AddForce(Vector2.up * jumpForce * 0.8f, ForceMode2D.Impulse);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce * 0.8f);
             canDoubleJump = false;
             FindFirstObjectByType<AudioManager>().Play("Jump");
         }
-        #endregion
 
-        #region Crouch
-        if (Input.GetButton("Crouch") && !isGrounded && isAttacking == false)
+        // Crouch in Air
+        if (Input.GetButton("Crouch") && !isGrounded && !isAttacking)
         {
             rb.AddForce(-Vector2.up * crouchForce, ForceMode2D.Impulse);
             GFX.localScale = new Vector3(GFX.localScale.x, crouchHeight, GFX.localScale.z);
         }
 
         if (Input.GetButtonUp("Crouch"))
+        {
             GFX.localScale = new Vector3(GFX.localScale.x, 1f, GFX.localScale.z);
-        #endregion
+        }
 
-        #region AttackingSpin
+        // Attack Spin
         if (Input.GetKeyDown(KeyCode.F) && !isAttacking)
         {
             isAttacking = true;
@@ -134,7 +125,5 @@ public class PlayerMovement : MonoBehaviour
         {
             playerImage.transform.rotation = Quaternion.identity;
         }
-        #endregion
-
     }
 }

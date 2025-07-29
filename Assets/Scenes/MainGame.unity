@@ -2310,6 +2310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.35
+  gameStarts: {fileID: 2043504547}
   bgRenderer: {fileID: 2042617286}
 --- !u!1 &2043504543
 GameObject:
